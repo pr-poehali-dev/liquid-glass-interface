@@ -123,7 +123,7 @@ const Index = () => {
             </div>
 
             <div className="absolute left-1/2 -translate-x-1/2">
-              <h1 className="text-xl font-semibold text-gray-900 whitespace-nowrap">
+              <h1 className="font-semibold text-gray-900 whitespace-nowrap text-4xl">
                 ИИ ПАНЕЛЬ проектно-изыскательных работ
               </h1>
             </div>
