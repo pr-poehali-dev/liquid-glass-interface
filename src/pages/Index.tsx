@@ -13,7 +13,7 @@ const Index = () => {
   const projects = [
     {
       id: 1,
-      name: "Мост через р. Волга",
+      name: "Мост через р. Неман",
       category: "мосты",
       progress: 85,
       status: "active",
@@ -26,7 +26,7 @@ const Index = () => {
     },
     {
       id: 2,
-      name: "Парк «Центральный»",
+      name: "Парк «Победы»",
       category: "благоустройство",
       progress: 60,
       status: "active",
@@ -39,7 +39,7 @@ const Index = () => {
     },
     {
       id: 3,
-      name: "Трасса М-11 участок 12",
+      name: "Магистраль М-1 участок 7",
       category: "дороги",
       progress: 40,
       status: "planning",
@@ -52,7 +52,7 @@ const Index = () => {
     },
     {
       id: 4,
-      name: "Пешеходный мост",
+      name: "Мост через р. Свислочь",
       category: "мосты",
       progress: 100,
       status: "completed",
@@ -66,15 +66,15 @@ const Index = () => {
   ];
 
   const documents = [
-    { id: 1, name: "Чертеж_мост_А-15.pdf", date: "10.11.2025", size: "2.4 МБ" },
-    { id: 2, name: "Смета_парк_центральный.xlsx", date: "08.11.2025", size: "1.2 МБ" },
-    { id: 3, name: "Техническое_задание_М11.docx", date: "05.11.2025", size: "890 КБ" },
+    { id: 1, name: "Чертеж_мост_А-15.pdf", date: "10.11.2025", size: "2.4 МБ", aiComment: "Проектная документация соответствует СНиП, обнаружены устаревшие нормативы раздела 3.2" },
+    { id: 2, name: "Смета_парк_победы.xlsx", date: "08.11.2025", size: "1.2 МБ", aiComment: "Расчёты выполнены корректно, рекомендуется актуализировать цены на материалы" },
+    { id: 3, name: "Техническое_задание_М1.docx", date: "05.11.2025", size: "890 КБ", aiComment: "Документ требует согласования с отделом экологии по пункту 4.7" },
   ];
 
   const incomingPackages = [
-    { id: 1, name: "Пакет №124 - Мост через Волгу", status: "valid", date: "12.11.2025" },
-    { id: 2, name: "Пакет №125 - Парк Центральный", status: "error", date: "12.11.2025" },
-    { id: 3, name: "Пакет №126 - Трасса М-11", status: "valid", date: "11.11.2025" },
+    { id: 1, name: "Пакет №124 - Мост через Неман", status: "valid", date: "12.11.2025" },
+    { id: 2, name: "Пакет №125 - Парк Победы", status: "error", date: "12.11.2025" },
+    { id: 3, name: "Пакет №126 - Магистраль М-1", status: "valid", date: "11.11.2025" },
   ];
 
   const scannedDrawings = [
@@ -144,7 +144,7 @@ const Index = () => {
       </header>
 
       <main className="container mx-auto px-6 py-8">
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
           <Card className="p-6 backdrop-blur-lg bg-white/60 border-black/10 rounded-3xl shadow-xl hover:shadow-2xl transition-all">
             <div className="flex items-center gap-3 mb-6">
               <div className="p-2 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500">
@@ -153,7 +153,7 @@ const Index = () => {
               <h2 className="text-2xl font-semibold text-gray-900">Комплексное проектирование</h2>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-3">
               {projects.map((project) => (
                 <div
                   key={project.id}
@@ -216,20 +216,26 @@ const Index = () => {
               {documents.map((doc) => (
                 <div
                   key={doc.id}
-                  className="flex items-center justify-between p-4 rounded-2xl bg-white/80 backdrop-blur-sm border border-black/10 hover:bg-white/90 transition-all group cursor-pointer"
+                  className="p-4 rounded-2xl bg-white/80 backdrop-blur-sm border border-black/10 hover:bg-white/90 transition-all group cursor-pointer"
                 >
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 rounded-xl bg-blue-100">
-                      <Icon name="FileText" className="text-blue-600" size={20} />
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 rounded-xl bg-blue-100">
+                        <Icon name="FileText" className="text-blue-600" size={20} />
+                      </div>
+                      <div>
+                        <p className="font-medium text-gray-900 text-sm">{doc.name}</p>
+                        <p className="text-xs text-gray-600">
+                          {doc.date} • {doc.size}
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="font-medium text-gray-900 text-sm">{doc.name}</p>
-                      <p className="text-xs text-gray-600">
-                        {doc.date} • {doc.size}
-                      </p>
-                    </div>
+                    <Icon name="ChevronRight" className="text-gray-400 group-hover:text-blue-600 transition-colors" size={20} />
                   </div>
-                  <Icon name="ChevronRight" className="text-gray-400 group-hover:text-blue-600 transition-colors" size={20} />
+                  <div className="flex items-start gap-2 mt-2 p-2 rounded-xl bg-blue-50/50">
+                    <Icon name="Sparkles" className="text-blue-600 flex-shrink-0 mt-0.5" size={14} />
+                    <p className="text-xs text-gray-700 leading-relaxed">{doc.aiComment}</p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -286,6 +292,11 @@ const Index = () => {
               <h2 className="text-2xl font-semibold text-gray-900">Сканирование, печать</h2>
             </div>
 
+            <Button className="w-full mb-4 rounded-2xl h-12 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white border-0">
+              <Icon name="Upload" size={20} className="mr-2" />
+              Загрузить новый чертёж
+            </Button>
+
             <div className="space-y-3">
               {scannedDrawings.map((drawing) => (
                 <div
@@ -323,11 +334,6 @@ const Index = () => {
                 </div>
               ))}
             </div>
-
-            <Button className="w-full mt-4 rounded-2xl h-12 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white border-0">
-              <Icon name="Upload" size={20} className="mr-2" />
-              Загрузить новый чертёж
-            </Button>
           </Card>
         </div>
       </main>
