@@ -72,9 +72,9 @@ const Index = () => {
   ];
 
   const incomingPackages = [
-    { id: 1, name: "Пакет №124 - Мост через Неман", status: "valid", date: "12.11.2025" },
-    { id: 2, name: "Пакет №125 - Парк Победы", status: "error", date: "12.11.2025" },
-    { id: 3, name: "Пакет №126 - Магистраль М-1", status: "valid", date: "11.11.2025" },
+    { id: 1, name: "Пакет №124 - Мост через Неман", status: "valid", date: "12.11.2025", errors: [] },
+    { id: 2, name: "Пакет №125 - Парк Победы", status: "error", date: "12.11.2025", errors: ["Отсутствует штамп ГИПа на листе 3", "Несоответствие масштаба на чертеже 7А", "Не указаны высотные отметки (разделы 2.1-2.3)"] },
+    { id: 3, name: "Пакет №126 - Магистраль М-1", status: "valid", date: "11.11.2025", errors: [] },
   ];
 
   const scannedDrawings = [
@@ -253,32 +253,64 @@ const Index = () => {
               {incomingPackages.map((pkg) => (
                 <div
                   key={pkg.id}
-                  className="flex items-center justify-between p-4 rounded-2xl bg-white/80 backdrop-blur-sm border border-black/10 hover:bg-white/90 transition-all group"
+                  className="p-4 rounded-2xl bg-white/80 backdrop-blur-sm border border-black/10 hover:bg-white/90 transition-all"
                 >
-                  <div className="flex items-center gap-3 flex-1">
-                    <div
-                      className={`p-2 rounded-xl ${
-                        pkg.status === "error" ? "bg-red-100" : "bg-green-100"
-                      }`}
-                    >
-                      <Icon
-                        name={pkg.status === "error" ? "AlertCircle" : "CheckCircle2"}
-                        className={pkg.status === "error" ? "text-red-600" : "text-green-600"}
-                        size={20}
-                      />
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-3 flex-1">
+                      <div
+                        className={`p-2 rounded-xl ${
+                          pkg.status === "error" ? "bg-red-100" : "bg-green-100"
+                        }`}
+                      >
+                        <Icon
+                          name={pkg.status === "error" ? "AlertCircle" : "CheckCircle2"}
+                          className={pkg.status === "error" ? "text-red-600" : "text-green-600"}
+                          size={20}
+                        />
+                      </div>
+                      <div className="flex-1">
+                        <p className="font-medium text-gray-900 text-sm">{pkg.name}</p>
+                        <p className="text-xs text-gray-600">{pkg.date}</p>
+                      </div>
                     </div>
-                    <div className="flex-1">
-                      <p className="font-medium text-gray-900 text-sm">{pkg.name}</p>
-                      <p className="text-xs text-gray-600">{pkg.date}</p>
+                    <div className="flex gap-2">
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="rounded-xl border-red-200 text-red-600 hover:bg-red-50"
+                      >
+                        Отклонить
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant={pkg.status === "error" ? "destructive" : "outline"}
+                        className="rounded-xl"
+                      >
+                        {pkg.status === "error" ? "Исправить" : "Принять"}
+                      </Button>
                     </div>
                   </div>
-                  <Button
-                    size="sm"
-                    variant={pkg.status === "error" ? "destructive" : "outline"}
-                    className="rounded-xl"
-                  >
-                    {pkg.status === "error" ? "Исправить" : "Принять"}
-                  </Button>
+                  {pkg.errors.length > 0 && (
+                    <div className="mt-3 space-y-2">
+                      <div className="flex items-center gap-2 mb-2">
+                        <Icon name="AlertTriangle" className="text-red-600" size={16} />
+                        <p className="text-xs font-semibold text-red-700">Обнаружены ошибки:</p>
+                      </div>
+                      <ul className="space-y-1 ml-6">
+                        {pkg.errors.map((error, idx) => (
+                          <li key={idx} className="text-xs text-gray-700 list-disc">{error}</li>
+                        ))}
+                      </ul>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="w-full mt-2 rounded-xl border-blue-200 text-blue-600 hover:bg-blue-50"
+                      >
+                        <Icon name="Sparkles" size={16} className="mr-2" />
+                        Сформировать рекомендации по устранению ошибок
+                      </Button>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
