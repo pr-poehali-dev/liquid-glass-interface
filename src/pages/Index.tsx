@@ -150,7 +150,7 @@ const Index = () => {
               <div className="p-2 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500">
                 <Icon name="Building2" className="text-white" size={24} />
               </div>
-              <h2 className="text-2xl font-semibold text-gray-900">Комплексное проектирование</h2>
+              <h2 className="font-semibold text-gray-900 text-4xl">Комплексное проектирование</h2>
             </div>
 
             <div className="space-y-3">
@@ -198,7 +198,7 @@ const Index = () => {
               <div className="p-2 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500">
                 <Icon name="Archive" className="text-white" size={24} />
               </div>
-              <h2 className="text-2xl font-semibold text-gray-900">Технический архив</h2>
+              <h2 className="font-semibold text-gray-900 text-4xl">Технический архив</h2>
             </div>
 
             <div className="relative mb-6">
@@ -246,7 +246,7 @@ const Index = () => {
               <div className="p-2 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500">
                 <Icon name="CheckCircle" className="text-white" size={24} />
               </div>
-              <h2 className="text-2xl font-semibold text-gray-900">Приём исполнительных чертежей</h2>
+              <h2 className="font-semibold text-gray-900 text-4xl">Приём исполнительных чертежей</h2>
             </div>
 
             <div className="space-y-3">
@@ -289,7 +289,7 @@ const Index = () => {
               <div className="p-2 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500">
                 <Icon name="Scan" className="text-white" size={24} />
               </div>
-              <h2 className="text-2xl font-semibold text-gray-900">Сканирование, печать</h2>
+              <h2 className="font-semibold text-gray-900 text-4xl">Сканирование, печать</h2>
             </div>
 
             <Button className="w-full mb-4 rounded-2xl h-12 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white border-0">
